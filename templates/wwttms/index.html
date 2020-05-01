@@ -1,0 +1,35 @@
+{% extends "wwttms/layout/layout.html" %}
+{% block title %}Create a Ticket{% endblock %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block body %}
+    <div class="content-wrapper">
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="container mt-5">
+                            <div class="card card-primary">
+                                <div class="card-header">
+                                    <h3 class="card-title">Create Ticket</h3>
+                                </div>
+                                <form role="form" class="form-group" method="post">
+                                    {% csrf_token %}
+                                    {{ form.crispy }}
+                                    <div class="container">
+                                        {% crispy form %}
+                                    </div>
+                                    <div class="card-footer">
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    {% include 'admin/layout/footer.html' %}
+{% endblock %}
+

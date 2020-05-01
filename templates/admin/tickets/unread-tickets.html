@@ -1,0 +1,67 @@
+{% extends "admin/layout/layout.html" %}
+{% block title %}Blank Page{% endblock %}
+{% load static %}
+{% block body %}
+    <div class="content-wrapper">
+        <section class="content">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Unread Tickets</h3>
+                        </div>
+                        <div class="card-body">
+                            <table id="example2" class="table table-bordered table-hover">
+                                <thead>
+                                <tr>
+                                    <th>Ticket Number</th>
+                                    <th>Full Name</th>
+                                    <th>Creator Email</th>
+                                    <th>Created Date</th>
+                                    <th>Updated Date</th>
+                                    <th>Is Active</th>
+                                    <th>Reply</th>
+                                    <th>Close Case</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% if unreadTickets %}
+                                    {% for ticket in unreadTickets %}
+                                        <tr>
+                                            <td><a href="{% url 'admin_ticket_detail' ticket.ticketNumber %}">{{ ticket.ticketNumber }}</a></td>
+                                            <td>{{ ticket.first_name }} {{ ticket.last_name }}</td>
+                                            <td>{{ ticket.creator.email }}</td>
+                                            <td>{{ ticket.createdDate }}</td>
+                                            <td>{{ ticket.updatedDate }}</td>
+                                            <td>{{ ticket.isActive }}</td>
+                                            <td>
+                                                <a style="color: #fff" href="{% url 'admin_ticket_detail' ticket.ticketNumber %}" class="btn btn-sm btn-success">Reply</a>
+                                            </td>
+                                            <td>
+                                                <a style="color: #fff" href="{% url 'delete_ticket' ticket.ticketNumber %}"><button class="btn btn-sm btn-danger">Close Case</button></a>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                {% endif %}
+                                </tbody>
+                                <tfoot>
+                                <tr>
+                                    <th>Ticket Number</th>
+                                    <th>Full Name</th>
+                                    <th>Creator Email</th>
+                                    <th>Created Date</th>
+                                    <th>Updated Date</th>
+                                    <th>Is Active</th>
+                                    <th>Reply</th>
+                                    <th>Close Case</th>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    {% include 'admin/layout/footer.html' %}
+{% endblock %}

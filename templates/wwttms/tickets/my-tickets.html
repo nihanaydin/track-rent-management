@@ -1,0 +1,70 @@
+{% extends "wwttms/layout/layout.html" %}
+{% block title %}My Tickets{% endblock %}
+{% load static %}
+{% block body %}
+    <div class="content-wrapper">
+        <section class="content">
+            <div class="row">
+                <div class="col-12 mt-5">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">My Tickets</h3>
+                        </div>
+                        <div class="card-body">
+                            <table id="example2" class="table table-bordered table-hover">
+                                <thead>
+                                <tr>
+                                    <th>Ticket Number</th>
+                                    <th>Email</th>
+                                    <th>Full Name</th>
+                                    <th>Creator Email</th>
+                                    <th>Created Date</th>
+                                    <th>Updated Date</th>
+                                    <th>Is Active</th>
+                                    <th>Show</th>
+                                    <th>Operations</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% if tickets %}
+                                    {% for ticket in tickets %}
+                                        <tr>
+                                            <td>{{ ticket.ticketNumber }}</td>
+                                            <td>{{ ticket.email }}</td>
+                                            <td>{{ ticket.first_name }} {{ ticket.last_name }}</td>
+                                            <td>{{ ticket.creator.email }}</td>
+                                            <td>{{ ticket.createdDate }}</td>
+                                            <td>{{ ticket.updatedDate }}</td>
+                                            <td>{% if ticket.isActive %}Aktif{% else %}Kapalı{% endif %}</td>
+                                            <td>
+                                                <a style="color: #fff" href="{% url 'my_tickets_detail' ticket.ticketNumber %}"><button class="btn btn-sm btn-warning">Show</button></a>
+                                            </td>
+                                            <td>
+                                                <a style="color: #fff" href="{% url 'delete_my_ticket' ticket.ticketNumber %}"><button class="btn btn-sm btn-danger">Delete</button></a>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                {% endif %}
+                                </tbody>
+                                <tfoot>
+                                <tr>
+                                    <th>Ticket Number</th>
+                                    <th>Email</th>
+                                    <th>Full Name</th>
+                                    <th>Creator Email</th>
+                                    <th>Created Date</th>
+                                    <th>Updated Date</th>
+                                    <th>Is Active</th>
+                                    <th>Show</th>
+                                    <th>Operations</th>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    {% include 'admin/layout/footer.html' %}
+{% endblock %}

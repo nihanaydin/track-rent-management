@@ -1,0 +1,60 @@
+{% extends "admin/layout/layout.html" %}
+{% block title %}Groups{% endblock %}
+{% load static %}
+{% block body %}
+    <div class="content-wrapper">
+        <section class="content">
+            <div class="row">
+                <div class="col-12 mt-5">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Groups</h3>
+                        </div>
+                        <div class="card-body">
+                            <table id="example2" class="table table-bordered table-hover">
+                                <thead>
+                                <tr>
+                                    <th>Group Id</th>
+                                    <th>Group Name</th>
+                                    <th>Created Date</th>
+                                    <th>Last Update</th>
+                                    <th>Is Active</th>
+                                    <th>Operations</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% if groups %}
+                                    {% for group in groups %}
+                                        <tr>
+                                            <td>{{ group.id }}</td>
+                                            <td>{{ group.title }}</td>
+                                            <td>{{ group.createdDate }}</td>
+                                            <td>{{ group.updatedDate }}</td>
+                                            <td>{{ group.isActive }}</td>
+                                            <td>
+                                                <a style="color: #fff" href="{% url 'edit_group' group.slug %}" type="button" class="btn btn-sm btn-success">Edit</a>
+                                                <a style="color: #fff" href="{% url 'delete_group' group.slug %}" type="button" class="btn btn-sm btn-danger">Delete</a>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                {% endif %}
+                                </tbody>
+                                <tfoot>
+                                <tr>
+                                    <th>Group Id</th>
+                                    <th>Group Name</th>
+                                    <th>Created Date</th>
+                                    <th>Last Update</th>
+                                    <th>Is Active</th>
+                                    <th>Operations</th>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    {% include 'admin/layout/footer.html' %}
+{% endblock %}

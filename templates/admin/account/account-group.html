@@ -1,0 +1,48 @@
+{% extends "admin/layout/layout.html" %}
+{% block title %}Users Group{% endblock %}
+{% load static %}
+{% block body %}
+    <div class="content-wrapper">
+        <section class="content">
+            <div class="row">
+                <div class="col-12 mt-5">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">User Groups</h3>
+                        </div>
+                        <div class="card-body">
+                            <table id="example2" class="table table-bordered table-hover">
+                                <thead>
+                                <tr>
+                                    <th>Username</th>
+                                    <th>Full Name</th>
+                                    <th>Group</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% if groups %}
+                                    {% for group in groups %}
+                                        <tr>
+                                            <td>{{ group.userId }}</td>
+                                            <td>{{ group.userId.get_full_name }}</td>
+                                            <td>{{ group.groupId }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                {% endif %}
+                                </tbody>
+                                <tfoot>
+                                <tr>
+                                    <th>Username</th>
+                                    <th>Full Name</th>
+                                    <th>Group</th>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    {% include 'admin/layout/footer.html' %}
+{% endblock %}
